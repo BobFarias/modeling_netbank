@@ -1,4 +1,4 @@
-import { IRegularAccount, IPockeAccount } from "./account-data";
+import { IRegularAccount, IPocketAccount } from "./account-data";
 
 // User's accounts which can be of different types: regular accounts and pocket accounts.
 // Users have at least one regular account.
@@ -8,7 +8,7 @@ export interface IUserDetails {
   name: string;
   email: string;
   regularAcount: Array<IRegularAccount>;
-  pocketAccount?: IPockeAccount;
+  pocketAccount?: IPocketAccount;
 }
 
 
