@@ -7,7 +7,7 @@ export interface IUserDetails {
   userId: number;
   name: string;
   email: string;
-  regularAcount: Array<IRegularAccount>;
+  regularAccount: Array<IRegularAccount>;
   pocketAccount?: IPocketAccount;
 }
 
