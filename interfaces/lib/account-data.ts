@@ -51,15 +51,3 @@ export type AnyPocket = SEKPocket | NOKPocket | USDPocket | EURPocket;
 export interface IPocketAccount extends IAccount {
   pockets: AnyPocket[];
 }
-
-// Essential function to add a new pocket to a pocket account
-// It will ensure that the account does not have the currency that they are trying to create
-export function addPocket(account: IPocketAccount, newPocket: AnyPocket): IPocketAccount | Error {
-  // Check if the account already has a pocket with the same currency as the new pocket.
-  if (account.pockets.some(pocket => pocket.currency === newPocket.currency)) {
-    // If a pocket with the same currency exists, return an error.
-    return new Error("A pocket with this currency already exists.");
-  }
-  // If no duplicate currency is found, add the new pocket to the account and return the updated account.
-  return { ...account, pockets: [...account.pockets, newPocket] };
-}
