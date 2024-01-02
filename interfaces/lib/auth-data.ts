@@ -10,7 +10,7 @@ export interface IPostLoginAuth {
 export interface IResponseLoginAuth {
   email: string;
   name: string;
-  expiresIn: string;
+  expiresIn: number; // SECONDS
   accessToken: string;
 }
 
