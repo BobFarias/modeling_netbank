@@ -31,7 +31,9 @@ export interface IGetSupportPage{
 }
 
 // Error pages display a message indicating whether the error is due to client-side or server-side issues.
+// Included a type property to specify the category of the error: 'client' or 'server'.
 export interface IGetErrorPage {
+  errorType: 'client' | 'server';
   statusCode: EClientStatusCode | EServerStatusCode;
-  errorMessage: keyof EClientStatusCode | keyof EServerStatusCode;
+  errorMessage: string;
 }
