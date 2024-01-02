@@ -10,20 +10,19 @@ export type TSupportWindow = IGetSupportPage & {
 };
 
 export type TWindowChat = {
-  windowState: "minized" | "open" | "fullscreen"
+  windowState: "minimized" | "open" | "fullscreen"
 };
-
 
 // Promise related to the details of the agent after successfully connecting with an agent
 export interface IAgentDetails {
-  idSupport: number;
+  idAgent: string;
   firstName: string;
   lastName: string;
-  protocolNumber : number;
 }
 
 // Interface with the details of the initialized support
 export interface IConfigConnectSupport {
+  idSupport: number;
   protocolNumber: number;
   userDetails: IUserDetails;
 }
@@ -47,27 +46,27 @@ export interface IResponseQueueSupport {
   leastBusyTime?: string;
 }
 
-// Promise post related to client messages
-export interface IPostClientMessage {
-  message: string;
-  userDetails: IUserDetails;
-}
 
 // Promise response related to client messages
 export interface IResponseClientMessage {
   successful?: boolean;
   error?: IServeResponse;
+  errorMessage?: string;
 }
 
-// Promise get related to agent messages
-export interface IReceiveMessage {
-  message: string;
-  agentDetails: IAgentDetails;
+// Type for a message in the chat, could be from user or agent
+export interface IChatMessage {
+  messageId: string;
+  sender: IAgentDetails | IUserDetails;
+  content: string;
+  timestamp: Date;
 }
 
 // Interface related to the chat state which will contain the entire conversation
-export interface ISupportMessages {
-  dataSupport: Array<IPostClientMessage | IReceiveMessage>
+export interface IChatSession extends IConfigConnectSupport {
+  messages: IChatMessage[];
+  isActive: boolean; // Indicates if the chat session is active
+  // Additional properties for context...
 }
 
 // Promise representing the post request to close the connection
