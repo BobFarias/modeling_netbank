@@ -1,5 +1,5 @@
 
-import { IAccount, EForeignCurrencies, IPocketMoney, ILocalMoney } from "./account-data";
+import { IAccount, EForeignCurrencies, IPocketMoney, ILocalMoney, ELocalCurrencies } from "./account-data";
 import { IServeResponse } from "./serve-data";
 
 // Promise representing the state responsible for handling the Iban and Swift
@@ -14,17 +14,25 @@ export interface IReceiverDetails {
 // Currency selection is required for payment if the payment is coming from a pocket account
 export interface IPostPayment extends IReceiverDetails {
   senderAccountDetails: IAccount;
-  senderCurrencyDetails?: keyof EForeignCurrencies;
+  senderCurrencyDetails?: keyof EForeignCurrencies | keyof ELocalCurrencies;
   amountPayment: number;
   datePayment: Date;
 }
 
 // Interface providing payment details
 export interface IDetailsPayment {
+  transactionId: string;
   receiptImage: string;
-  transcationDate: Date;
+  transactionDate: Date;
   senderAccDetails: IAccount;
   receiverAccDetails: IReceiverDetails;
+  amount: number;
+  status: 'Completed' | 'Pending' | 'Failed';
+  currency: keyof EForeignCurrencies | keyof ELocalCurrencies;
+  // optional details for the operation
+  description?: string;
+  fees?: number;
+  exchangeRate?: number;
 }
 
 // Promise interface for the payment response
